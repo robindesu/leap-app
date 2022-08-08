@@ -1,0 +1,15 @@
+.container {
+  padding: 10%;
+}
+
+.form {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  gap: 20px;
+}
+
+.form input {
+  padding: 5px;
+}
