@@ -22,3 +22,8 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
+
+## Tech Stack and Libraries
+
+- Redux-form : As suggested by the challenge it is being used the redux-form,
+  altough I would not use it because [is the general consensus of the community is that you should not put your form state in Redux](https://github.com/redux-form/redux-form).
