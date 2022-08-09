@@ -1,0 +1,8 @@
+.header {
+  background-color: var(--gray-secondary);
+  color: var(--white);
+  font-size: 2rem;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+}

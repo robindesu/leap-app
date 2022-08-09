@@ -1,15 +1,24 @@
 .container {
+  max-width: 500px;
   padding: 10%;
+  margin: auto;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  margin-top: 20px;
+  border-radius: 7px;
 }
 
 .form {
-  max-width: 500px;
   display: flex;
   flex-direction: column;
-  margin: auto;
   gap: 20px;
 }
 
 .form input {
   padding: 5px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
