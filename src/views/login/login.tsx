@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 import Button from "../../components/button/button";
 import renderField from "../../components/field/field";
@@ -22,8 +22,9 @@ interface FormValues extends StringByString {
 }
 
 function Login(props: LoginProps) {
-  const [requestError, setRequestError] = useState();
   const { handleSubmit } = props;
+  let navigate = useNavigate();
+  const [requestError, setRequestError] = useState();
 
   const submitForm = (data: FormValues) => {
     console.log(data);
@@ -32,6 +33,10 @@ function Login(props: LoginProps) {
       .post("https://frontend-test.getsandbox.com/users/login", data)
       .catch((error) => {
         setRequestError(error.response?.data?.error?.message);
+      })
+      .then((data: any) => {
+        localStorage.setItem("auth", data.data.session);
+        navigate("/");
       });
   };
 
