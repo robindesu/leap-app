@@ -22,3 +22,7 @@
 .form span {
   color: var(--pink-accent);
 }
+
+.form .link {
+  text-align: center;
+}

@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { Field, reduxForm } from "redux-form";
 import axios from "axios";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Field, reduxForm } from "redux-form";
 import Button from "../../components/button/button";
-import Header from "../../components/header/header";
 import renderField from "../../components/field/field";
+import Header from "../../components/header/header";
 
 import baseStyles from "../../styles/base.module.css";
-import { Link } from "react-router-dom";
 
-interface SignupProps {
+interface LoginProps {
   handleSubmit: Function;
 }
 
@@ -17,21 +17,19 @@ interface StringByString {
 }
 
 interface FormValues extends StringByString {
-  firstname: string;
-  surname: string;
-  email: string;
   username: string;
   password: string;
 }
 
-function Signup(props: SignupProps) {
-  const { handleSubmit } = props;
+function Login(props: LoginProps) {
   const [requestError, setRequestError] = useState();
+  const { handleSubmit } = props;
 
   const submitForm = (data: FormValues) => {
+    console.log(data);
     setRequestError(undefined);
     axios
-      .post("https://frontend-test.getsandbox.com/users", data)
+      .post("https://frontend-test.getsandbox.com/users/login", data)
       .catch((error) => {
         setRequestError(error.response?.data?.error?.message);
       });
@@ -39,36 +37,15 @@ function Signup(props: SignupProps) {
 
   return (
     <>
-      <Header text="Signup Page" />
+      <Header text="Login Page" />
 
       <div className={baseStyles.container}>
         <form className={baseStyles.form} onSubmit={handleSubmit(submitForm)}>
           <Field
-            name="firstname"
-            component={renderField}
-            type="text"
-            label="First Name"
-          />
-
-          <Field
-            name="surname"
-            component={renderField}
-            type="text"
-            label="Last Name"
-          />
-
-          <Field
-            name="email"
-            component={renderField}
-            type="text"
-            label="Email"
-          />
-
-          <Field
             name="username"
             component={renderField}
             type="text"
-            label="User Name"
+            label="First Name"
           />
 
           <Field
@@ -78,10 +55,10 @@ function Signup(props: SignupProps) {
             label="Password"
           />
 
-          <Button type="submit" label="Submit" />
+          <Button type="submit" label="Login" />
           {requestError && <span>{requestError}</span>}
           <p className={baseStyles.link}>
-            Already have an acount? <Link to="/login">Login</Link>
+            Don't have account? <Link to="/signup">Sign Up</Link>
           </p>
         </form>
       </div>
@@ -112,4 +89,4 @@ const validate = (values: FormValues) => {
 export default reduxForm({
   form: "signup",
   validate,
-})(Signup);
+})(Login);
