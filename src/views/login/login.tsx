@@ -30,7 +30,12 @@ function Login(props: LoginProps) {
     console.log(data);
     setRequestError(undefined);
     axios
-      .post("https://frontend-test.getsandbox.com/users/login", data)
+      .post("https://frontend-test.getsandbox.com/users/login", data, {
+        headers: {
+          crossorigin: true,
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
       .catch((error) => {
         setRequestError(error.response?.data?.error?.message);
       })
