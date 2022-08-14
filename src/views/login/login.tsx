@@ -8,10 +8,6 @@ import Header from "../../components/header/header";
 
 import baseStyles from "../../styles/base.module.css";
 
-interface LoginProps {
-  handleSubmit: Function;
-}
-
 interface StringByString {
   [key: string]: string;
 }
@@ -21,13 +17,12 @@ interface FormValues extends StringByString {
   password: string;
 }
 
-function Login(props: LoginProps) {
+function Login({ ...props }) {
+  const [requestError, setRequestError] = useState();
   const { handleSubmit } = props;
   let navigate = useNavigate();
-  const [requestError, setRequestError] = useState();
 
   const submitForm = (data: FormValues) => {
-    console.log(data);
     setRequestError(undefined);
     axios
       .post("https://frontend-test.getsandbox.com/users/login", data, {
@@ -97,6 +92,6 @@ const validate = (values: FormValues) => {
 };
 
 export default reduxForm({
-  form: "signup",
+  form: "login",
   validate,
 })(Login);

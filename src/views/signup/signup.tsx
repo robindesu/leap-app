@@ -8,10 +8,6 @@ import renderField from "../../components/field/field";
 import baseStyles from "../../styles/base.module.css";
 import { Link } from "react-router-dom";
 
-interface SignupProps {
-  handleSubmit: Function;
-}
-
 interface StringByString {
   [key: string]: string;
 }
@@ -24,7 +20,7 @@ interface FormValues extends StringByString {
   password: string;
 }
 
-function Signup(props: SignupProps) {
+function Signup({ ...props }) {
   const { handleSubmit } = props;
   const [requestError, setRequestError] = useState();
 

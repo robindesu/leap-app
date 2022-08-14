@@ -1,0 +1,24 @@
+.home {
+  padding: 10%;
+}
+
+.table {
+  margin-top: 30px;
+  width: 100%;
+  border: 1px solid gray;
+}
+
+.table thead {
+  background: var(--blue-secondary);
+  color: var(gray);
+}
+
+.table td {
+  text-align: center;
+  padding: 5px;
+}
+
+.table tbody tr:hover {
+  background-color: var(--blue-secondary);
+  cursor: pointer;
+}

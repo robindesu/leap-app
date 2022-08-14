@@ -8,6 +8,7 @@ import {
 import Signup from "./views/signup/signup";
 import Login from "./views/login/login";
 import Home from "./views/home/home";
+import Application from "./views/application/application";
 import store from "./store";
 
 import "./styles/colors.css";
@@ -32,6 +33,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/application"
+            element={
+              <ProtectedRoute>
+                <Application />
               </ProtectedRoute>
             }
           />
