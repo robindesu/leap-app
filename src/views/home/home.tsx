@@ -1,38 +1,28 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/button/button";
 import Header from "../../components/header/header";
+import { fetchApplications } from "../../store/applications";
+import { AppDispatch, RootState } from "../../store/store";
+import { ApplicationT } from "../application/application";
 
 import styles from "./home.module.css";
 
-interface HomeProps {}
-
-interface Application {
-  id: number;
-  name: string;
-  secret: string;
-  lang: string;
-  version: string;
-}
-
 function Home() {
-  const [applications, setApplications] = useState<Application[]>([]);
+  const { entities, loading } = useSelector(
+    (state: RootState) => state.applications
+  );
+  const dispatch = useDispatch<AppDispatch>();
   let navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get("https://frontend-test.getsandbox.com/applications", {
-        withCredentials: true,
-        headers: {
-          crossorigin: true,
-          "Access-Control-Allow-Credentials": true,
-        },
-      })
-      .then((data) => {
-        setApplications(data.data);
-      });
+    dispatch(fetchApplications());
   }, []);
+
+  const openAppicationPage = (id: string) => {
+    navigate(`/application/${id}`);
+  };
 
   return (
     <>
@@ -53,13 +43,15 @@ function Home() {
             </tr>
           </thead>
           <tbody>
-            {applications.map((app) => (
-              <tr>
-                <td>{app.name}</td>
-                <td>{app.lang}</td>
-                <td>{app.version}</td>
-              </tr>
-            ))}
+            {loading && <span>Loading...</span>}
+            {!loading &&
+              entities.map((app: ApplicationT) => (
+                <tr onClick={() => openAppicationPage(app.id)} key={app.id}>
+                  <td>{app.name}</td>
+                  <td>{app.lang}</td>
+                  <td>{app.version}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

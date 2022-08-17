@@ -9,7 +9,7 @@ import Signup from "./views/signup/signup";
 import Login from "./views/login/login";
 import Home from "./views/home/home";
 import Application from "./views/application/application";
-import store from "./store";
+import store from "./store/store";
 
 import "./styles/colors.css";
 import "./App.css";
@@ -43,7 +43,16 @@ function App() {
                 <Application />
               </ProtectedRoute>
             }
-          />
+          >
+            <Route
+              path=":id"
+              element={
+                <ProtectedRoute>
+                  <Application />
+                </ProtectedRoute>
+              }
+            ></Route>
+          </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
